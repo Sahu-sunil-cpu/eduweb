@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from "./components/Navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,8 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable}  className="min-h-screen bg-gray-100 border border-black`}>
+        <Navbar/>
+       <main>{children}</main> 
+       <footer className="bg-gray-800 text-white text-center py-6 mt-10">
+        <p className="text-sm">© 2025 StructX. All rights reserved.</p>
+      </footer>
       </body>
     </html>
   );
