@@ -1,6 +1,9 @@
+"use client"
+import { useSession } from "next-auth/react";
 import React from "react";
 
 const StructXHeroPage = () => {
+  const session = useSession();
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-between">
 
@@ -18,7 +21,7 @@ const StructXHeroPage = () => {
           className="mx-auto w-full max-w-md mb-6"
         />
         <button className="bg-blue-600 text-white py-2 px-6 rounded-full hover:bg-blue-700 transition">
-          Start Learning
+        {JSON.stringify(session.data?.user)}
         </button>
       </section>
 
@@ -47,9 +50,7 @@ const StructXHeroPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white text-center py-6 mt-10">
-        <p className="text-sm">© 2025 StructX. All rights reserved.</p>
-      </footer>
+ 
     </div>
   );
 };
