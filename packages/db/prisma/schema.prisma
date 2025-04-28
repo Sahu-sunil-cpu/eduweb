@@ -17,19 +17,20 @@ datasource db {
 model User {
   id       String @unique @default(uuid())
   username String
+  email    String @unique
   password String
 }
 
 model College {
-   id    Int    @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   name       String   @unique
   collegeImg String
   course     Course[]
 }
 
 model Course {
-  id    Int    @id @default(autoincrement()) 
-  name   String  @unique
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
   collegeId Int
   college   College   @relation(fields: [collegeId], references: [id])
   courseImg String
@@ -37,28 +38,26 @@ model Course {
 }
 
 model Subject {
-    id    Int    @id @default(autoincrement())
+  id       Int        @id @default(autoincrement())
   courseId Int
-  name     String   @unique
-  course   Course    @relation(fields: [courseId], references: [id])
+  name     String     @unique
+  course   Course     @relation(fields: [courseId], references: [id])
   subImg   String?
   chapter  Chapter[]
-  resource  Resource[]
+  resource Resource[]
 }
 
 model Chapter {
-  id    Int    @id @default(autoincrement())
-  name     String   @unique
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
   link      String
   subjectId Int
   subject   Subject @relation(fields: [subjectId], references: [id])
 }
 
-
 model Resource {
-  id  Int  @id  @default(autoincrement())
-  link   String
-   subjectId Int
+  id        Int     @id @default(autoincrement())
+  link      String
+  subjectId Int
   subject   Subject @relation(fields: [subjectId], references: [id])
-
 }

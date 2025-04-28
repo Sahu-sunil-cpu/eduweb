@@ -32,7 +32,7 @@ export default function CourseModal({open, setOpen}: {open: boolean, setOpen: Di
     
       <Dialog open={open} setOpen={setOpen}>
         
-            <div className="max-w-3xl p-2 rounded-2xl bg-white shadow-2xl">
+            <div className="max-w-3xl p-2 rounded-2xl bg-white shadow-2xl  absolute top-32 right-150">
         <div className=" px-6  h-[400px] overflow-auto w-[300px]">
           <div>
             <div className="text-2xl text-purple-700 mb-4">Courses Offered</div>

@@ -12,7 +12,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "prisma": "6.6.0",
     "@repo/typescript-config": "workspace:*"

@@ -20,7 +20,7 @@ export default function Dialog({open, setOpen, children}: DialogProps) {
                      <span 
          className=" absolute top-2 right-2 border border-black rounded cursor-pointer"
          onClick={() => setOpen(false)}> <X className="h-5 w-5" /></span>
-          <div className="flex  items-center justify-center absolute top-32 right-150">
+          <div className="flex  items-center justify-center">
         {  children }
         </div>
           </div>}
