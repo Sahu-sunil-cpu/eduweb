@@ -1355,10 +1355,12 @@ export namespace Prisma {
    */
 
   export type CourseCountOutputType = {
+    college: number
     subject: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    college?: boolean | CourseCountOutputTypeCountCollegeArgs
     subject?: boolean | CourseCountOutputTypeCountSubjectArgs
   }
 
@@ -1371,6 +1373,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the CourseCountOutputType
      */
     select?: CourseCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeCountCollegeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CollegeWhereInput
   }
 
   /**
@@ -3499,32 +3508,27 @@ export namespace Prisma {
 
   export type CourseAvgAggregateOutputType = {
     id: number | null
-    collegeId: number | null
   }
 
   export type CourseSumAggregateOutputType = {
     id: number | null
-    collegeId: number | null
   }
 
   export type CourseMinAggregateOutputType = {
     id: number | null
     name: string | null
-    collegeId: number | null
     courseImg: string | null
   }
 
   export type CourseMaxAggregateOutputType = {
     id: number | null
     name: string | null
-    collegeId: number | null
     courseImg: string | null
   }
 
   export type CourseCountAggregateOutputType = {
     id: number
     name: number
-    collegeId: number
     courseImg: number
     _all: number
   }
@@ -3532,32 +3536,27 @@ export namespace Prisma {
 
   export type CourseAvgAggregateInputType = {
     id?: true
-    collegeId?: true
   }
 
   export type CourseSumAggregateInputType = {
     id?: true
-    collegeId?: true
   }
 
   export type CourseMinAggregateInputType = {
     id?: true
     name?: true
-    collegeId?: true
     courseImg?: true
   }
 
   export type CourseMaxAggregateInputType = {
     id?: true
     name?: true
-    collegeId?: true
     courseImg?: true
   }
 
   export type CourseCountAggregateInputType = {
     id?: true
     name?: true
-    collegeId?: true
     courseImg?: true
     _all?: true
   }
@@ -3651,7 +3650,6 @@ export namespace Prisma {
   export type CourseGroupByOutputType = {
     id: number
     name: string
-    collegeId: number
     courseImg: string
     _count: CourseCountAggregateOutputType | null
     _avg: CourseAvgAggregateOutputType | null
@@ -3677,9 +3675,8 @@ export namespace Prisma {
   export type CourseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    collegeId?: boolean
     courseImg?: boolean
-    college?: boolean | CollegeDefaultArgs<ExtArgs>
+    college?: boolean | Course$collegeArgs<ExtArgs>
     subject?: boolean | Course$subjectArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
@@ -3687,49 +3684,39 @@ export namespace Prisma {
   export type CourseSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    collegeId?: boolean
     courseImg?: boolean
-    college?: boolean | CollegeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
   export type CourseSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    collegeId?: boolean
     courseImg?: boolean
-    college?: boolean | CollegeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
 
   export type CourseSelectScalar = {
     id?: boolean
     name?: boolean
-    collegeId?: boolean
     courseImg?: boolean
   }
 
-  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "collegeId" | "courseImg", ExtArgs["result"]["course"]>
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "courseImg", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    college?: boolean | CollegeDefaultArgs<ExtArgs>
+    college?: boolean | Course$collegeArgs<ExtArgs>
     subject?: boolean | Course$subjectArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    college?: boolean | CollegeDefaultArgs<ExtArgs>
-  }
-  export type CourseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    college?: boolean | CollegeDefaultArgs<ExtArgs>
-  }
+  export type CourseIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CourseIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $CoursePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Course"
     objects: {
-      college: Prisma.$CollegePayload<ExtArgs>
+      college: Prisma.$CollegePayload<ExtArgs>[]
       subject: Prisma.$SubjectPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-      collegeId: number
       courseImg: string
     }, ExtArgs["result"]["course"]>
     composites: {}
@@ -4125,7 +4112,7 @@ export namespace Prisma {
    */
   export interface Prisma__CourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    college<T extends CollegeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CollegeDefaultArgs<ExtArgs>>): Prisma__CollegeClient<$Result.GetResult<Prisma.$CollegePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    college<T extends Course$collegeArgs<ExtArgs> = {}>(args?: Subset<T, Course$collegeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CollegePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     subject<T extends Course$subjectArgs<ExtArgs> = {}>(args?: Subset<T, Course$subjectArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4158,7 +4145,6 @@ export namespace Prisma {
   interface CourseFieldRefs {
     readonly id: FieldRef<"Course", 'Int'>
     readonly name: FieldRef<"Course", 'String'>
-    readonly collegeId: FieldRef<"Course", 'Int'>
     readonly courseImg: FieldRef<"Course", 'String'>
   }
     
@@ -4409,10 +4395,6 @@ export namespace Prisma {
      */
     data: CourseCreateManyInput | CourseCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CourseIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4483,10 +4465,6 @@ export namespace Prisma {
      * Limit how many Courses to update.
      */
     limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CourseIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4553,6 +4531,30 @@ export namespace Prisma {
      * Limit how many Courses to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Course.college
+   */
+  export type Course$collegeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the College
+     */
+    select?: CollegeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the College
+     */
+    omit?: CollegeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CollegeInclude<ExtArgs> | null
+    where?: CollegeWhereInput
+    orderBy?: CollegeOrderByWithRelationInput | CollegeOrderByWithRelationInput[]
+    cursor?: CollegeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CollegeScalarFieldEnum | CollegeScalarFieldEnum[]
   }
 
   /**
@@ -7928,7 +7930,6 @@ export namespace Prisma {
   export const CourseScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    collegeId: 'collegeId',
     courseImg: 'courseImg'
   };
 
@@ -8138,18 +8139,16 @@ export namespace Prisma {
     NOT?: CourseWhereInput | CourseWhereInput[]
     id?: IntFilter<"Course"> | number
     name?: StringFilter<"Course"> | string
-    collegeId?: IntFilter<"Course"> | number
     courseImg?: StringFilter<"Course"> | string
-    college?: XOR<CollegeScalarRelationFilter, CollegeWhereInput>
+    college?: CollegeListRelationFilter
     subject?: SubjectListRelationFilter
   }
 
   export type CourseOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    collegeId?: SortOrder
     courseImg?: SortOrder
-    college?: CollegeOrderByWithRelationInput
+    college?: CollegeOrderByRelationAggregateInput
     subject?: SubjectOrderByRelationAggregateInput
   }
 
@@ -8159,16 +8158,14 @@ export namespace Prisma {
     AND?: CourseWhereInput | CourseWhereInput[]
     OR?: CourseWhereInput[]
     NOT?: CourseWhereInput | CourseWhereInput[]
-    collegeId?: IntFilter<"Course"> | number
     courseImg?: StringFilter<"Course"> | string
-    college?: XOR<CollegeScalarRelationFilter, CollegeWhereInput>
+    college?: CollegeListRelationFilter
     subject?: SubjectListRelationFilter
   }, "id" | "name">
 
   export type CourseOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    collegeId?: SortOrder
     courseImg?: SortOrder
     _count?: CourseCountOrderByAggregateInput
     _avg?: CourseAvgOrderByAggregateInput
@@ -8183,7 +8180,6 @@ export namespace Prisma {
     NOT?: CourseScalarWhereWithAggregatesInput | CourseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Course"> | number
     name?: StringWithAggregatesFilter<"Course"> | string
-    collegeId?: IntWithAggregatesFilter<"Course"> | number
     courseImg?: StringWithAggregatesFilter<"Course"> | string
   }
 
@@ -8439,37 +8435,36 @@ export namespace Prisma {
   export type CourseCreateInput = {
     name: string
     courseImg: string
-    college: CollegeCreateNestedOneWithoutCourseInput
+    college?: CollegeCreateNestedManyWithoutCourseInput
     subject?: SubjectCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateInput = {
     id?: number
     name: string
-    collegeId: number
     courseImg: string
+    college?: CollegeUncheckedCreateNestedManyWithoutCourseInput
     subject?: SubjectUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     courseImg?: StringFieldUpdateOperationsInput | string
-    college?: CollegeUpdateOneRequiredWithoutCourseNestedInput
+    college?: CollegeUpdateManyWithoutCourseNestedInput
     subject?: SubjectUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    collegeId?: IntFieldUpdateOperationsInput | number
     courseImg?: StringFieldUpdateOperationsInput | string
+    college?: CollegeUncheckedUpdateManyWithoutCourseNestedInput
     subject?: SubjectUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseCreateManyInput = {
     id?: number
     name: string
-    collegeId: number
     courseImg: string
   }
 
@@ -8481,7 +8476,6 @@ export namespace Prisma {
   export type CourseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    collegeId?: IntFieldUpdateOperationsInput | number
     courseImg?: StringFieldUpdateOperationsInput | string
   }
 
@@ -8738,15 +8732,20 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type CollegeScalarRelationFilter = {
-    is?: CollegeWhereInput
-    isNot?: CollegeWhereInput
+  export type CollegeListRelationFilter = {
+    every?: CollegeWhereInput
+    some?: CollegeWhereInput
+    none?: CollegeWhereInput
   }
 
   export type SubjectListRelationFilter = {
     every?: SubjectWhereInput
     some?: SubjectWhereInput
     none?: SubjectWhereInput
+  }
+
+  export type CollegeOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type SubjectOrderByRelationAggregateInput = {
@@ -8756,32 +8755,27 @@ export namespace Prisma {
   export type CourseCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    collegeId?: SortOrder
     courseImg?: SortOrder
   }
 
   export type CourseAvgOrderByAggregateInput = {
     id?: SortOrder
-    collegeId?: SortOrder
   }
 
   export type CourseMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    collegeId?: SortOrder
     courseImg?: SortOrder
   }
 
   export type CourseMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    collegeId?: SortOrder
     courseImg?: SortOrder
   }
 
   export type CourseSumOrderByAggregateInput = {
     id?: SortOrder
-    collegeId?: SortOrder
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -8949,14 +8943,12 @@ export namespace Prisma {
   export type CourseCreateNestedManyWithoutCollegeInput = {
     create?: XOR<CourseCreateWithoutCollegeInput, CourseUncheckedCreateWithoutCollegeInput> | CourseCreateWithoutCollegeInput[] | CourseUncheckedCreateWithoutCollegeInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutCollegeInput | CourseCreateOrConnectWithoutCollegeInput[]
-    createMany?: CourseCreateManyCollegeInputEnvelope
     connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
   }
 
   export type CourseUncheckedCreateNestedManyWithoutCollegeInput = {
     create?: XOR<CourseCreateWithoutCollegeInput, CourseUncheckedCreateWithoutCollegeInput> | CourseCreateWithoutCollegeInput[] | CourseUncheckedCreateWithoutCollegeInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutCollegeInput | CourseCreateOrConnectWithoutCollegeInput[]
-    createMany?: CourseCreateManyCollegeInputEnvelope
     connect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
   }
 
@@ -8964,7 +8956,6 @@ export namespace Prisma {
     create?: XOR<CourseCreateWithoutCollegeInput, CourseUncheckedCreateWithoutCollegeInput> | CourseCreateWithoutCollegeInput[] | CourseUncheckedCreateWithoutCollegeInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutCollegeInput | CourseCreateOrConnectWithoutCollegeInput[]
     upsert?: CourseUpsertWithWhereUniqueWithoutCollegeInput | CourseUpsertWithWhereUniqueWithoutCollegeInput[]
-    createMany?: CourseCreateManyCollegeInputEnvelope
     set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
     disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
     delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
@@ -8986,7 +8977,6 @@ export namespace Prisma {
     create?: XOR<CourseCreateWithoutCollegeInput, CourseUncheckedCreateWithoutCollegeInput> | CourseCreateWithoutCollegeInput[] | CourseUncheckedCreateWithoutCollegeInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutCollegeInput | CourseCreateOrConnectWithoutCollegeInput[]
     upsert?: CourseUpsertWithWhereUniqueWithoutCollegeInput | CourseUpsertWithWhereUniqueWithoutCollegeInput[]
-    createMany?: CourseCreateManyCollegeInputEnvelope
     set?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
     disconnect?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
     delete?: CourseWhereUniqueInput | CourseWhereUniqueInput[]
@@ -8996,10 +8986,10 @@ export namespace Prisma {
     deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
   }
 
-  export type CollegeCreateNestedOneWithoutCourseInput = {
-    create?: XOR<CollegeCreateWithoutCourseInput, CollegeUncheckedCreateWithoutCourseInput>
-    connectOrCreate?: CollegeCreateOrConnectWithoutCourseInput
-    connect?: CollegeWhereUniqueInput
+  export type CollegeCreateNestedManyWithoutCourseInput = {
+    create?: XOR<CollegeCreateWithoutCourseInput, CollegeUncheckedCreateWithoutCourseInput> | CollegeCreateWithoutCourseInput[] | CollegeUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: CollegeCreateOrConnectWithoutCourseInput | CollegeCreateOrConnectWithoutCourseInput[]
+    connect?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
   }
 
   export type SubjectCreateNestedManyWithoutCourseInput = {
@@ -9009,6 +8999,12 @@ export namespace Prisma {
     connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
   }
 
+  export type CollegeUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<CollegeCreateWithoutCourseInput, CollegeUncheckedCreateWithoutCourseInput> | CollegeCreateWithoutCourseInput[] | CollegeUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: CollegeCreateOrConnectWithoutCourseInput | CollegeCreateOrConnectWithoutCourseInput[]
+    connect?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
+  }
+
   export type SubjectUncheckedCreateNestedManyWithoutCourseInput = {
     create?: XOR<SubjectCreateWithoutCourseInput, SubjectUncheckedCreateWithoutCourseInput> | SubjectCreateWithoutCourseInput[] | SubjectUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: SubjectCreateOrConnectWithoutCourseInput | SubjectCreateOrConnectWithoutCourseInput[]
@@ -9016,12 +9012,17 @@ export namespace Prisma {
     connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
   }
 
-  export type CollegeUpdateOneRequiredWithoutCourseNestedInput = {
-    create?: XOR<CollegeCreateWithoutCourseInput, CollegeUncheckedCreateWithoutCourseInput>
-    connectOrCreate?: CollegeCreateOrConnectWithoutCourseInput
-    upsert?: CollegeUpsertWithoutCourseInput
-    connect?: CollegeWhereUniqueInput
-    update?: XOR<XOR<CollegeUpdateToOneWithWhereWithoutCourseInput, CollegeUpdateWithoutCourseInput>, CollegeUncheckedUpdateWithoutCourseInput>
+  export type CollegeUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<CollegeCreateWithoutCourseInput, CollegeUncheckedCreateWithoutCourseInput> | CollegeCreateWithoutCourseInput[] | CollegeUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: CollegeCreateOrConnectWithoutCourseInput | CollegeCreateOrConnectWithoutCourseInput[]
+    upsert?: CollegeUpsertWithWhereUniqueWithoutCourseInput | CollegeUpsertWithWhereUniqueWithoutCourseInput[]
+    set?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
+    disconnect?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
+    delete?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
+    connect?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
+    update?: CollegeUpdateWithWhereUniqueWithoutCourseInput | CollegeUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: CollegeUpdateManyWithWhereWithoutCourseInput | CollegeUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: CollegeScalarWhereInput | CollegeScalarWhereInput[]
   }
 
   export type SubjectUpdateManyWithoutCourseNestedInput = {
@@ -9036,6 +9037,19 @@ export namespace Prisma {
     update?: SubjectUpdateWithWhereUniqueWithoutCourseInput | SubjectUpdateWithWhereUniqueWithoutCourseInput[]
     updateMany?: SubjectUpdateManyWithWhereWithoutCourseInput | SubjectUpdateManyWithWhereWithoutCourseInput[]
     deleteMany?: SubjectScalarWhereInput | SubjectScalarWhereInput[]
+  }
+
+  export type CollegeUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<CollegeCreateWithoutCourseInput, CollegeUncheckedCreateWithoutCourseInput> | CollegeCreateWithoutCourseInput[] | CollegeUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: CollegeCreateOrConnectWithoutCourseInput | CollegeCreateOrConnectWithoutCourseInput[]
+    upsert?: CollegeUpsertWithWhereUniqueWithoutCourseInput | CollegeUpsertWithWhereUniqueWithoutCourseInput[]
+    set?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
+    disconnect?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
+    delete?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
+    connect?: CollegeWhereUniqueInput | CollegeWhereUniqueInput[]
+    update?: CollegeUpdateWithWhereUniqueWithoutCourseInput | CollegeUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: CollegeUpdateManyWithWhereWithoutCourseInput | CollegeUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: CollegeScalarWhereInput | CollegeScalarWhereInput[]
   }
 
   export type SubjectUncheckedUpdateManyWithoutCourseNestedInput = {
@@ -9311,11 +9325,6 @@ export namespace Prisma {
     create: XOR<CourseCreateWithoutCollegeInput, CourseUncheckedCreateWithoutCollegeInput>
   }
 
-  export type CourseCreateManyCollegeInputEnvelope = {
-    data: CourseCreateManyCollegeInput | CourseCreateManyCollegeInput[]
-    skipDuplicates?: boolean
-  }
-
   export type CourseUpsertWithWhereUniqueWithoutCollegeInput = {
     where: CourseWhereUniqueInput
     update: XOR<CourseUpdateWithoutCollegeInput, CourseUncheckedUpdateWithoutCollegeInput>
@@ -9338,7 +9347,6 @@ export namespace Prisma {
     NOT?: CourseScalarWhereInput | CourseScalarWhereInput[]
     id?: IntFilter<"Course"> | number
     name?: StringFilter<"Course"> | string
-    collegeId?: IntFilter<"Course"> | number
     courseImg?: StringFilter<"Course"> | string
   }
 
@@ -9383,26 +9391,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CollegeUpsertWithoutCourseInput = {
+  export type CollegeUpsertWithWhereUniqueWithoutCourseInput = {
+    where: CollegeWhereUniqueInput
     update: XOR<CollegeUpdateWithoutCourseInput, CollegeUncheckedUpdateWithoutCourseInput>
     create: XOR<CollegeCreateWithoutCourseInput, CollegeUncheckedCreateWithoutCourseInput>
-    where?: CollegeWhereInput
   }
 
-  export type CollegeUpdateToOneWithWhereWithoutCourseInput = {
-    where?: CollegeWhereInput
+  export type CollegeUpdateWithWhereUniqueWithoutCourseInput = {
+    where: CollegeWhereUniqueInput
     data: XOR<CollegeUpdateWithoutCourseInput, CollegeUncheckedUpdateWithoutCourseInput>
   }
 
-  export type CollegeUpdateWithoutCourseInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    collegeImg?: StringFieldUpdateOperationsInput | string
+  export type CollegeUpdateManyWithWhereWithoutCourseInput = {
+    where: CollegeScalarWhereInput
+    data: XOR<CollegeUpdateManyMutationInput, CollegeUncheckedUpdateManyWithoutCourseInput>
   }
 
-  export type CollegeUncheckedUpdateWithoutCourseInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    collegeImg?: StringFieldUpdateOperationsInput | string
+  export type CollegeScalarWhereInput = {
+    AND?: CollegeScalarWhereInput | CollegeScalarWhereInput[]
+    OR?: CollegeScalarWhereInput[]
+    NOT?: CollegeScalarWhereInput | CollegeScalarWhereInput[]
+    id?: IntFilter<"College"> | number
+    name?: StringFilter<"College"> | string
+    collegeImg?: StringFilter<"College"> | string
   }
 
   export type SubjectUpsertWithWhereUniqueWithoutCourseInput = {
@@ -9434,14 +9445,14 @@ export namespace Prisma {
   export type CourseCreateWithoutSubjectInput = {
     name: string
     courseImg: string
-    college: CollegeCreateNestedOneWithoutCourseInput
+    college?: CollegeCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutSubjectInput = {
     id?: number
     name: string
-    collegeId: number
     courseImg: string
+    college?: CollegeUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutSubjectInput = {
@@ -9503,14 +9514,14 @@ export namespace Prisma {
   export type CourseUpdateWithoutSubjectInput = {
     name?: StringFieldUpdateOperationsInput | string
     courseImg?: StringFieldUpdateOperationsInput | string
-    college?: CollegeUpdateOneRequiredWithoutCourseNestedInput
+    college?: CollegeUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutSubjectInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    collegeId?: IntFieldUpdateOperationsInput | number
     courseImg?: StringFieldUpdateOperationsInput | string
+    college?: CollegeUncheckedUpdateManyWithoutCourseNestedInput
   }
 
   export type ChapterUpsertWithWhereUniqueWithoutSubjectInput = {
@@ -9656,12 +9667,6 @@ export namespace Prisma {
     chapter?: ChapterUncheckedUpdateManyWithoutSubjectNestedInput
   }
 
-  export type CourseCreateManyCollegeInput = {
-    id?: number
-    name: string
-    courseImg: string
-  }
-
   export type CourseUpdateWithoutCollegeInput = {
     name?: StringFieldUpdateOperationsInput | string
     courseImg?: StringFieldUpdateOperationsInput | string
@@ -9685,6 +9690,23 @@ export namespace Prisma {
     id?: number
     name: string
     subImg?: string | null
+  }
+
+  export type CollegeUpdateWithoutCourseInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    collegeImg?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CollegeUncheckedUpdateWithoutCourseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    collegeImg?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CollegeUncheckedUpdateManyWithoutCourseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    collegeImg?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubjectUpdateWithoutCourseInput = {

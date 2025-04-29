@@ -12,18 +12,20 @@ route.get("/getColleges", async (req, res) => {
 route.get("/course/:id", async (req, res) => {
     const data = req.params
     const courseData = await prismaClient.course.findMany({
-        where: {
-            name: data.id
-        }
+        include: {
+            college: true
+        },
+
+
     });
     res.send(courseData);
 })
 
 route.get("/subject/:id", async (req, res) => {
     const data = req.params
-    const subjectData = await prismaClient.course.findMany({
+    const subjectData = await prismaClient.subject.findMany({
         where: {
-            name: data.id
+          courseId: parseInt(data.id),
         }
     });
     res.send(subjectData);
@@ -31,9 +33,9 @@ route.get("/subject/:id", async (req, res) => {
 
 route.get("/chapter/:id", async (req, res) => {
     const data = req.params
-    const chapterData = await prismaClient.course.findMany({
+    const chapterData = await prismaClient.chapter.findMany({
         where: {
-            name: data.id
+            subjectId: parseInt(data.id),
         }
     });
     res.send(chapterData);
@@ -44,7 +46,10 @@ route.post("/college", async (req, res) => {
     const collegeData = await prismaClient.college.create({
         data: {
             name: data.name,
-            collegeImg: data.collegeImg,        
+            collegeImg: data.collegeImg,     
+            course: {
+                create: [data.courses]
+            }   
         }
     })
 
@@ -52,18 +57,17 @@ route.post("/college", async (req, res) => {
 })
 
 
-route.post("/course", async (req, res) => {
-    const data = req.body;
-    const collegeData = await prismaClient.course.create({
-        data: {
-            name: data.name,
-            courseImg: data.courseImg,
-            collegeId: data.collegeId
-        }
-    })
+// route.post("/course", async (req, res) => {
+//     const data = req.body;
+//     const collegeData = await prismaClient.course.create({
+//         data: {
+//             name: data.name,
+//             courseImg: data.courseImg,
+//         }
+//     })
 
-    res.send(collegeData);
-})
+//     res.send(collegeData);
+// })
 
 route.post("/subject", async (req, res) => {
     const data = req.body;

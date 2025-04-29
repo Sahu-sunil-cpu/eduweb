@@ -133,7 +133,6 @@ exports.Prisma.CollegeScalarFieldEnum = {
 exports.Prisma.CourseScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  collegeId: 'collegeId',
   courseImg: 'courseImg'
 };
 

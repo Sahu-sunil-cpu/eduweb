@@ -1,11 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import CourseModal from "../components/CourseModal";
+import axios from "axios";
+import { BACKEND_URL } from "../utils";
 
 const StructXPage = () => {
   const [open, setOpen] = useState(false);
+
+  const getColleges = () => {
+    const res = axios.get(`${BACKEND_URL}/getColleges`, {
+      
+    })
+  }
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-100 border border-black">

@@ -22,20 +22,21 @@ model User {
 }
 
 model College {
-  id         Int      @id @default(autoincrement())
-  name       String   @unique
-  collegeImg String
-  course     Course[]
-}
+  id               Int                @id @default(autoincrement())
+  name             String             @unique
+  collegeImg       String
+  course           Course[]         @relation("collegeToCourse") 
+}    
 
 model Course {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  collegeId Int
-  college   College   @relation(fields: [collegeId], references: [id])
-  courseImg String
-  subject   Subject[]
+  id               Int                @id @default(autoincrement())
+  name             String             @unique
+  courseImg        String
+  college          College[]        @relation("collegeToCourse") 
+  subject          Subject[]
 }
+
+
 
 model Subject {
   id       Int        @id @default(autoincrement())

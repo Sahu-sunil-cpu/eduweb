@@ -31,9 +31,8 @@ model College {
 model Course {
   id        Int       @id @default(autoincrement())
   name      String    @unique
-  collegeId Int
-  college   College   @relation(fields: [collegeId], references: [id])
   courseImg String
+  college   College[]
   subject   Subject[]
 }
 
