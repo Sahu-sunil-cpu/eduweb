@@ -25,14 +25,14 @@ model College {
   id         Int      @id @default(autoincrement())
   name       String   @unique
   collegeImg String
-  course     Course[]
+  course     Course[] @relation("collegeToCourse")
 }
 
 model Course {
   id        Int       @id @default(autoincrement())
   name      String    @unique
   courseImg String
-  college   College[]
+  college   College[] @relation("collegeToCourse")
   subject   Subject[]
 }
 

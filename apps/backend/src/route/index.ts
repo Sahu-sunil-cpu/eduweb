@@ -11,10 +11,15 @@ route.get("/getColleges", async (req, res) => {
 
 route.get("/course/:id", async (req, res) => {
     const data = req.params
-    const courseData = await prismaClient.course.findMany({
-        include: {
-            college: true
+    console.log(data.id)
+    const courseData = await prismaClient.college.findUnique({
+    
+        where: {
+            id: parseInt(data.id)
         },
+        include: {
+            course: true
+        }
 
 
     });
@@ -48,7 +53,7 @@ route.post("/college", async (req, res) => {
             name: data.name,
             collegeImg: data.collegeImg,     
             course: {
-                create: [data.courses]
+                create: [data.course]
             }   
         }
     })

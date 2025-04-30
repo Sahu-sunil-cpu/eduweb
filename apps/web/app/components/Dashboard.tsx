@@ -1,17 +1,19 @@
 "use client"
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import React from "react";
 import "../globals.css";
 import { useRouter } from 'next/navigation'
 
 
-const StructXHeroPage = () => {
+export default function StructXHeroPage(){
   const session = useSession();
   const router = useRouter();
 
   const clickHandler = () => {
     if (session.data?.user) {
       router.push('/searchCollege');
+    }else {
+      signIn();
     }
   }
 
@@ -98,6 +100,6 @@ const StructXHeroPage = () => {
   );
 };
 
-export default StructXHeroPage;
+
 
 
